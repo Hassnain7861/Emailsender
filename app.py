@@ -586,16 +586,19 @@ def upload_leads():
 
     try:
         leads = []
+        # Fix: SpooledTemporaryFile in Python 3.10 lacks 'seekable' which some parsers expect.
+        # We read the stream into BytesIO to provide a standard seekable buffer.
+        file_bytes = file.read()
+        file_stream = BytesIO(file_bytes)
         
         if file.filename.endswith('.csv'):
-            file.seek(0)
-            stream = StringIO(file.read().decode('utf-8'))
+            stream = StringIO(file_bytes.decode('utf-8'))
             reader = csv.DictReader(stream)
             leads = list(reader)
         elif file.filename.endswith(('.xlsx', '.xls')):
             try:
                 import openpyxl
-                wb = openpyxl.load_workbook(file.stream)
+                wb = openpyxl.load_workbook(file_stream)
                 ws = wb.active
                 rows = list(ws.iter_rows(values_only=True))
                 headers = [str(h).strip() if h else '' for h in rows[0]]
