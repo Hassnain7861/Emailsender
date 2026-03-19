@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Dashboard — Email Campaign Manager</title>
+    <meta name="description" content="CRM dashboard for lead management, campaign tracking, and email engagement metrics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f0e17;
+            --bg-secondary: #1a1930;
+            --bg-card: rgba(30, 28, 58, 0.7);
+            --bg-glass: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --text-primary: #fffffe;
+            --text-secondary: #a7a9be;
+            --text-muted: #6b6d80;
+            --accent: #7f5af0;
+            --accent-glow: rgba(127,90,240,0.35);
+            --green: #2cb67d;
+            --green-glow: rgba(44,182,125,0.25);
+            --orange: #ff8906;
+            --orange-glow: rgba(255,137,6,0.25);
+            --red: #e53170;
+            --red-glow: rgba(229,49,112,0.25);
+            --blue: #3da9fc;
+            --blue-glow: rgba(61,169,252,0.25);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background gradient orbs */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+            z-index: 0;
+            pointer-events: none;
+        }
+        body::before {
+            width: 500px; height: 500px;
+            background: var(--accent);
+            top: -100px; right: -100px;
+        }
+        body::after {
+            width: 400px; height: 400px;
+            background: var(--green);
+            bottom: -50px; left: -50px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .header-actions a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-primary);
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            transition: all 0.25s;
+        }
+        .header-actions a:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+        .refresh-timer {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(20px);
+            transition: border-color 0.3s;
+        }
+        .card:hover {
+            border-color: rgba(255,255,255,0.12);
+        }
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title .icon {
+            font-size: 16px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.15);
+        }
+        .stat-card .glow {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.5;
+        }
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-card .label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+        .stat-card .rate {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 13px;
+        }
+        thead th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg-card);
+        }
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--text-secondary);
+            transition: background 0.15s;
+        }
+        tbody tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-green {
+            background: var(--green-glow);
+            color: var(--green);
+        }
+        .badge-blue {
+            background: var(--blue-glow);
+            color: var(--blue);
+        }
+        .badge-orange {
+            background: var(--orange-glow);
+            color: var(--orange);
+        }
+        .badge-red {
+            background: var(--red-glow);
+            color: var(--red);
+        }
+        .badge-muted {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-glass);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            outline: none;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+        .filter-select {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            min-width: 160px;
+        }
+        .filter-select option {
+            background: var(--bg-secondary);
+        }
+
+        /* Empty / loading */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .empty-state .icon-large {
+            font-size: 40px;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+
+        .loading-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grid layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Scrollable table wrapper */
+        .table-wrap {
+            max-height: 420px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+        .table-wrap::-webkit-scrollbar { width: 6px; }
+        .table-wrap::-webkit-scrollbar-track { background: transparent; }
+        .table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        /* Dot indicator */
+        .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+        .dot-orange { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
+        .dot-blue { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
+        .dot-red { background: var(--red); box-shadow: 0 0 6px var(--red); }
+        .dot-muted { background: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header fade-in">
+            <div>
+                <h1>📊 CRM Dashboard</h1>
+                <div class="subtitle">Lead management &bull; Campaign tracking &bull; Engagement metrics</div>
+            </div>
+            <div class="header-actions">
+                <span class="refresh-timer" id="refreshTimer">Auto-refresh: 30s</span>
+                <a href="/">← Campaign App</a>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid fade-in" id="statsGrid">
+            <div class="stat-card loading-pulse">
+                <div class="glow" style="background:var(--accent)"></div>
+                <div class="value" style="color:var(--accent)">—</div>
+                <div class="label">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Campaigns + Reminders -->
+        <div class="grid-2">
+            <div class="card fade-in">
+                <div class="card-title"><span class="icon">🚀</span> Campaigns</div>
+                <div class="table-wrap" id="campaignsList">
+                    <div class="empty-state loading-pulse">Loading campaigns…</div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-title"><span class="icon">🔔</span> Reminders <small style="color:var(--text-muted);font-weight:400;font-size:11px;margin-left:6px;">(no response after {{ reminder_days }}d)</small></div>
+                <div class="table-wrap" id="reminders">
+                    <div class="empty-state loading-pulse">Loading…</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follow-ups -->
+        <div class="card fade-in">
+            <div class="card-title"><span class="icon">📩</span> Follow-up Queue</div>
+            <div class="table-wrap" id="followupList">
+                <div class="empty-state loading-pulse">Loading…</div>
+            </div>
+        </div>
+
+        <!-- Leads -->
+        <div class="card fade-in">
+            <div class="card-title"><span class="icon">👥</span> Leads</div>
+            <div class="filters">
+                <select class="filter-select" id="filterCampaign">
+                    <option value="">All campaigns</option>
+                </select>
+                <button class="filter-btn" id="filterToday">Today's sends</button>
+                <button class="filter-btn" id="filterFollowups">Needs follow-up</button>
+                <button class="filter-btn" id="filterNotContacted">Not contacted</button>
+                <button class="filter-btn" id="filterReset">Reset</button>
+            </div>
+            <div class="table-wrap" id="leadsList">
+                <div class="empty-state loading-pulse">Loading leads…</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- API helper --- */
+        async function api(path) {
+            try {
+                const r = await fetch(path);
+                const t = await r.text();
+                try { return JSON.parse(t); } catch(_) { return {}; }
+            } catch(e) { console.error('API', path, e); return {}; }
+        }
+
+        /* --- Stats --- */
+        async function loadStats() {
+            const d = await api('/api/crm/stats');
+            if (!d.enabled) {
+                document.getElementById('statsGrid').innerHTML = '<div class="empty-state">CRM disabled. Set <code>ENABLE_CRM=1</code>.</div>';
+                return;
+            }
+            const sent = d.emails_sent_count || 0;
+            const opens = d.opens_count || 0;
+            const clicks = d.clicks_count || 0;
+            const failed = d.emails_failed_count || 0;
+            const openRate = sent > 0 ? ((opens / sent) * 100).toFixed(1) : '0.0';
+            const clickRate = sent > 0 ? ((clicks / sent) * 100).toFixed(1) : '0.0';
+
+            document.getElementById('statsGrid').innerHTML = `
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--accent)"></div>
+                    <div class="value" style="color:var(--accent)">${d.leads_count ?? 0}</div>
+                    <div class="label">Total leads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--blue)"></div>
+                    <div class="value" style="color:var(--blue)">${d.campaigns_count ?? 0}</div>
+                    <div class="label">Campaigns</div>
+                </div>
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--green)"></div>
+                    <div class="value" style="color:var(--green)">${sent}</div>
+                    <div class="label">Emails sent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--orange)"></div>
+                    <div class="value" style="color:var(--orange)">${opens}</div>
+                    <div class="label">Opens</div>
+                    <div class="rate" style="background:var(--orange-glow);color:var(--orange);">${openRate}%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--blue)"></div>
+                    <div class="value" style="color:var(--blue)">${clicks}</div>
+                    <div class="label">Clicks</div>
+                    <div class="rate" style="background:var(--blue-glow);color:var(--blue);">${clickRate}%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--red)"></div>
+                    <div class="value" style="color:var(--red)">${d.reminder_alerts_count ?? 0}</div>
+                    <div class="label">Reminders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="glow" style="background:var(--red)"></div>
+                    <div class="value" style="color:var(--red)">${failed}</div>
+                    <div class="label">Failed</div>
+                </div>
+            `;
+        }
+
+        /* --- Campaigns --- */
+        async function loadCampaigns() {
+            const d = await api('/api/crm/campaigns');
+            const list = d.campaigns || [];
+
+            // Populate campaign filter
+            const sel = document.getElementById('filterCampaign');
+            sel.innerHTML = '<option value="">All campaigns</option>' + list.map(c =>
+                `<option value="${c.id}">${c.name} (${c.emails_sent_count || 0})</option>`
+            ).join('');
+
+            if (list.length === 0) {
+                document.getElementById('campaignsList').innerHTML = '<div class="empty-state"><div class="icon-large">🚀</div>No campaigns yet</div>';
+                return;
+            }
+
+            function statusBadge(s) {
+                const map = {
+                    completed: 'badge-green', sent: 'badge-green',
+                    running: 'badge-blue', pending: 'badge-orange',
+                    scheduled: 'badge-orange',
+                    failed: 'badge-red', stopped: 'badge-red'
+                };
+                const dotMap = {
+                    completed: 'dot-green', sent: 'dot-green',
+                    running: 'dot-blue', pending: 'dot-orange',
+                    scheduled: 'dot-orange',
+                    failed: 'dot-red', stopped: 'dot-red'
+                };
+                return `<span class="badge ${map[s] || 'badge-muted'}"><span class="dot ${dotMap[s] || 'dot-muted'}"></span>${s}</span>`;
+            }
+
+            document.getElementById('campaignsList').innerHTML = `
+                <table>
+                    <thead><tr><th>Campaign</th><th>Status</th><th>Sent</th><th>Created</th></tr></thead>
+                    <tbody>${list.map(c => `
+                        <tr>
+                            <td style="color:var(--text-primary);font-weight:500;">${c.name}</td>
+                            <td>${statusBadge(c.status)}</td>
+                            <td>${c.emails_sent_count || 0}</td>
+                            <td>${c.created_at ? new Date(c.created_at).toLocaleDateString() : '—'}</td>
+                        </tr>
+                    `).join('')}</tbody>
+                </table>`;
+        }
+
+        /* --- Reminders --- */
+        async function loadReminders() {
+            const d = await api('/api/crm/reminders');
+            const alerts = d.alerts || [];
+            if (alerts.length === 0) {
+                document.getElementById('reminders').innerHTML = '<div class="empty-state"><div class="icon-large">✅</div>No pending reminders</div>';
+                return;
+            }
+            document.getElementById('reminders').innerHTML = `
+                <table>
+                    <thead><tr><th>Email</th><th>Campaign</th><th>Sent</th></tr></thead>
+                    <tbody>${alerts.slice(0, 50).map(a => `
+                        <tr>
+                            <td style="color:var(--text-primary)">${a.email}</td>
+                            <td>${a.campaign_id}</td>
+                            <td>${a.sent_at ? new Date(a.sent_at).toLocaleDateString() : '—'}</td>
+                        </tr>
+                    `).join('')}</tbody>
+                </table>`;
+        }
+
+        /* --- Follow-ups --- */
+        async function loadFollowups() {
+            const d = await api('/api/crm/followup-leads');
+            const list = d.leads || [];
+            if (list.length === 0) {
+                document.getElementById('followupList').innerHTML = '<div class="empty-state"><div class="icon-large">📭</div>No leads need follow-up right now</div>';
+                return;
+            }
+            document.getElementById('followupList').innerHTML = `
+                <table>
+                    <thead><tr><th>Email</th><th>Name</th><th>Campaign</th><th>Sent</th><th>Follow-ups</th></tr></thead>
+                    <tbody>${list.map(l => `
+                        <tr>
+                            <td style="color:var(--text-primary)">${l.email}</td>
+                            <td>${l.name || '—'}</td>
+                            <td>${l.campaign_id}</td>
+                            <td>${l.sent_at ? new Date(l.sent_at).toLocaleDateString() : '—'}</td>
+                            <td><span class="badge badge-orange">${l.follow_up_count || 0}</span></td>
+                        </tr>
+                    `).join('')}</tbody>
+                </table>`;
+        }
+
+        /* --- Leads --- */
+        let activeFilter = null;
+        async function loadLeads(params = {}) {
+            const q = new URLSearchParams(params).toString();
+            const d = await api('/api/crm/leads' + (q ? '?' + q : ''));
+            const list = d.leads || [];
+
+            if (list.length === 0) {
+                document.getElementById('leadsList').innerHTML = '<div class="empty-state"><div class="icon-large">👥</div>No leads found</div>';
+                return;
+            }
+
+            document.getElementById('leadsList').innerHTML = `
+                <table>
+                    <thead><tr><th>Email</th><th>Name</th><th>Lead Status</th><th>Email Status</th><th>Last sent</th><th>Opened</th><th>Clicked</th></tr></thead>
+                    <tbody>${list.map(l => `
+                        <tr>
+                            <td style="color:var(--text-primary);font-weight:500" title="${l.error_message || ''}">${l.email}</td>
+                            <td>${l.name || '—'}</td>
+                            <td><span class="badge badge-muted">${l.status}</span></td>
+                            <td>${l.email_status === 'failed' ? '<span class="badge badge-red">❌ Failed</span>' : (l.email_status === 'sent' ? '<span class="badge badge-green">✓ Sent</span>' : '<span style="color:var(--text-muted)">—</span>')}</td>
+                            <td>${l.last_sent_at ? new Date(l.last_sent_at).toLocaleDateString() : '—'}</td>
+                            <td>${l.opened_at
+                                ? '<span class="badge badge-green">✓ Opened</span>'
+                                : '<span style="color:var(--text-muted)">—</span>'}</td>
+                            <td>${l.clicked_at
+                                ? '<span class="badge badge-blue">✓ Clicked</span>'
+                                : '<span style="color:var(--text-muted)">—</span>'}</td>
+                        </tr>
+                    `).join('')}</tbody>
+                </table>`;
+        }
+
+        /* --- Filter handlers --- */
+        function setActive(btnId) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btnId) document.getElementById(btnId)?.classList.add('active');
+            activeFilter = btnId;
+        }
+        document.getElementById('filterToday').onclick = () => { setActive('filterToday'); loadLeads({ today: '1' }); };
+        document.getElementById('filterFollowups').onclick = () => { setActive('filterFollowups'); loadLeads({ not_contacted: '0' }); loadFollowups(); };
+        document.getElementById('filterNotContacted').onclick = () => { setActive('filterNotContacted'); loadLeads({ not_contacted: '1' }); };
+        document.getElementById('filterReset').onclick = () => { setActive(null); loadLeads(); };
+        document.getElementById('filterCampaign').onchange = function() {
+            setActive(null);
+            loadLeads(this.value ? { campaign_id: this.value } : {});
+        };
+
+        /* --- Auto-refresh --- */
+        let countdown = 30;
+        function tick() {
+            countdown--;
+            document.getElementById('refreshTimer').textContent = `Auto-refresh: ${countdown}s`;
+            if (countdown <= 0) {
+                countdown = 30;
+                refreshAll();
+            }
+        }
+
+        async function refreshAll() {
+            await Promise.all([loadStats(), loadCampaigns(), loadReminders(), loadFollowups()]);
+            // Keep any active lead filter
+            if (activeFilter === 'filterToday') loadLeads({ today: '1' });
+            else if (activeFilter === 'filterNotContacted') loadLeads({ not_contacted: '1' });
+            else loadLeads();
+        }
+
+        /* --- Init --- */
+        (async function init() {
+            await refreshAll();
+            setInterval(tick, 1000);
+        })();
+    </script>
+</body>
+</html>
