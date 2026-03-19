@@ -75,10 +75,19 @@ def record_sent_and_get_tracking_id(lead_id, campaign_id):
 
 def mark_opened(emails_sent_id):
     """Mark email as opened (pixel hit). Idempotent."""
+    print(f"[TRACKING] Mark Opened triggered for ID: {emails_sent_id}")
+    import sys
+    sys.stdout.flush()
     rec = EmailsSent.query.get(emails_sent_id)
-    if rec and not rec.opened_at:
-        rec.opened_at = datetime.utcnow()
-        db.session.commit()
+    if rec:
+        print(f"[TRACKING] Record found for ID {emails_sent_id}. Current opened_at: {rec.opened_at}")
+        if not rec.opened_at:
+            rec.opened_at = datetime.utcnow()
+            db.session.commit()
+            print(f"[TRACKING] Successfully marked ID {emails_sent_id} as OPENED at {rec.opened_at}")
+    else:
+        print(f"[TRACKING] CRITICAL: No record found in DB for ID: {emails_sent_id}")
+    sys.stdout.flush()
     return rec
 
 
@@ -115,6 +124,9 @@ def inject_tracking_pixel(body_html_or_plain, base_url, emails_sent_id):
     if not base_url or not emails_sent_id:
         return body_html_or_plain
     pixel_url = f'{base_url.rstrip("/")}/api/track/open/{emails_sent_id}'
+    print(f"[TRACKING] Injecting pixel: {pixel_url}")
+    import sys
+    sys.stdout.flush()
     pixel = f'<img src="{pixel_url}" width="1" height="1" style="display:none;" alt="" />'
     if body_html_or_plain.strip().lower().startswith('<'):
         return body_html_or_plain + '\n' + pixel

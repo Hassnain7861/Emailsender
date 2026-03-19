@@ -48,6 +48,7 @@ app = Flask(__name__, template_folder=found_template_dir)
 
 print(f"=== FLASK BOOTING ===")
 print(f"Resolved template_folder to: {found_template_dir}")
+print(f"Active Tracking Base: {app.config['TRACKING_BASE_URL']}")
 import sys
 sys.stdout.flush()
 print(f"=====================")
@@ -61,7 +62,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Allow SQLite to work with Flask's multi-threaded dev server
 if app.config['SQLALCHEMY_DATABASE_URI'].startswith('sqlite'):
     app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'connect_args': {'check_same_thread': False}}
-app.config['TRACKING_BASE_URL'] = os.environ.get('TRACKING_BASE_URL', 'http://localhost:5000')
+
+# Tracking fallback: 1. ENV, 2. Render auto-url, 3. localhost
+app.config['TRACKING_BASE_URL'] = os.environ.get('TRACKING_BASE_URL') or \
+                                  os.environ.get('RENDER_EXTERNAL_URL') or \
+                                  'http://localhost:5000'
+
 app.config['REMINDER_DAYS'] = int(os.environ.get('REMINDER_DAYS', '3'))
 app.config['ENABLE_AUTO_FOLLOWUP'] = os.environ.get('ENABLE_AUTO_FOLLOWUP', '0').strip().lower() in ('1', 'true', 'yes')
 app.config['MAX_FOLLOWUP_COUNT'] = int(os.environ.get('MAX_FOLLOWUP_COUNT', '3'))
@@ -75,7 +81,7 @@ if app.config['ENABLE_CRM']:
         normalize_email, get_or_create_lead, lead_exists_by_email,
         create_campaign, check_already_sent, record_sent_and_get_tracking_id,
         mark_opened, mark_clicked, wrap_links_for_tracking, inject_tracking_pixel,
-        update_campaign_status, get_leads_needing_followup
+        update_campaign_status, get_leads_needing_followup, update_email_status
     )
 # In-memory reminder alerts (CRM job populates; does not affect sending)
 REMINDER_ALERTS = []
@@ -840,8 +846,14 @@ def track_open(emails_sent_id):
     """1x1 pixel: mark email as opened. Does not affect sending."""
     if app.config.get('ENABLE_CRM'):
         try:
+            print(f"[HIT] Open hit for ID: {emails_sent_id}")
             mark_opened(emails_sent_id)
-        except Exception:
+            import sys
+            sys.stdout.flush()
+        except Exception as e:
+            print(f"[HIT] Open track error: {e}")
+            import sys
+            sys.stdout.flush()
             pass
     # 1x1 transparent GIF
     gif = b'GIF89a\x01\x00\x01\x00\x80\x00\x00\xff\xff\xff\x00\x00\x00!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;'
@@ -854,8 +866,14 @@ def track_click(emails_sent_id):
     target = request.args.get('url', '')
     if app.config.get('ENABLE_CRM'):
         try:
+            print(f"[HIT] Click hit for ID: {emails_sent_id} -> {target}")
             mark_clicked(emails_sent_id)
-        except Exception:
+            import sys
+            sys.stdout.flush()
+        except Exception as e:
+            print(f"[HIT] Click track error: {e}")
+            import sys
+            sys.stdout.flush()
             pass
     if target:
         try:
