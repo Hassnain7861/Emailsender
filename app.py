@@ -48,6 +48,7 @@ app = Flask(__name__, template_folder=found_template_dir)
 
 print(f"=== FLASK BOOTING ===")
 print(f"Resolved template_folder to: {found_template_dir}")
+print(f"Active Tracking Base: {app.config['TRACKING_BASE_URL']}")
 import sys
 sys.stdout.flush()
 print(f"=====================")
@@ -61,7 +62,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Allow SQLite to work with Flask's multi-threaded dev server
 if app.config['SQLALCHEMY_DATABASE_URI'].startswith('sqlite'):
     app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'connect_args': {'check_same_thread': False}}
-app.config['TRACKING_BASE_URL'] = os.environ.get('TRACKING_BASE_URL', 'http://localhost:5000')
+
+# Tracking fallback: 1. ENV, 2. Render auto-url, 3. localhost
+app.config['TRACKING_BASE_URL'] = os.environ.get('TRACKING_BASE_URL') or \
+                                  os.environ.get('RENDER_EXTERNAL_URL') or \
+                                  'http://localhost:5000'
+
 app.config['REMINDER_DAYS'] = int(os.environ.get('REMINDER_DAYS', '3'))
 app.config['ENABLE_AUTO_FOLLOWUP'] = os.environ.get('ENABLE_AUTO_FOLLOWUP', '0').strip().lower() in ('1', 'true', 'yes')
 app.config['MAX_FOLLOWUP_COUNT'] = int(os.environ.get('MAX_FOLLOWUP_COUNT', '3'))
