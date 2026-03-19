@@ -1,0 +1,155 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- C:\Python314\python.exe
+rootdir: C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default
+plugins: anyio-4.12.1, cov-7.0.0
+collecting ... collected 35 items
+
+tests/test_crm.py::TestDeduplication::test_normalize_email PASSED        [  2%]
+tests/test_crm.py::TestDeduplication::test_get_or_create_lead_deduplication PASSED [  5%]
+tests/test_crm.py::TestDeduplication::test_lead_exists_by_email PASSED   [  8%]
+tests/test_crm.py::TestDeduplicationEdgeCases::test_normalize_whitespace_only PASSED [ 11%]
+tests/test_crm.py::TestDeduplicationEdgeCases::test_normalize_preserves_valid PASSED [ 14%]
+tests/test_crm.py::TestDeduplicationEdgeCases::test_get_or_create_lead_empty_email PASSED [ 17%]
+tests/test_crm.py::TestDeduplicationEdgeCases::test_dedup_across_multiple_calls PASSED [ 20%]
+tests/test_crm.py::TestDeduplicationEdgeCases::test_get_or_create_updates_name PASSED [ 22%]
+tests/test_crm.py::TestPreventDuplicateSends::test_check_already_sent PASSED [ 25%]
+tests/test_crm.py::TestPreventDuplicateSends::test_check_already_sent_none_args PASSED [ 28%]
+tests/test_crm.py::TestCampaignStatusSync::test_update_sets_status PASSED [ 31%]
+tests/test_crm.py::TestCampaignStatusSync::test_update_nonexistent_returns_none PASSED [ 34%]
+tests/test_crm.py::TestCampaignStatusSync::test_update_with_none_args PASSED [ 37%]
+tests/test_crm.py::TestFollowUpLogic::test_followup_returns_old_unopened PASSED [ 40%]
+tests/test_crm.py::TestFollowUpLogic::test_followup_skips_opened PASSED  [ 42%]
+tests/test_crm.py::TestFollowUpLogic::test_followup_respects_max_count PASSED [ 45%]
+tests/test_crm.py::TestAutomatedReminders::test_reminder_job_populates_alerts PASSED [ 48%]
+tests/test_crm.py::TestOpenClickTracking::test_track_open_marks_opened_at PASSED [ 51%]
+tests/test_crm.py::TestOpenClickTracking::test_track_click_marks_clicked_at_and_redirects PASSED [ 54%]
+tests/test_crm.py::TestOpenClickTracking::test_track_open_idempotent PASSED [ 57%]
+tests/test_crm.py::TestTrackingHelpers::test_wrap_links_replaces_urls PASSED [ 60%]
+tests/test_crm.py::TestTrackingHelpers::test_wrap_links_empty_body PASSED [ 62%]
+tests/test_crm.py::TestTrackingHelpers::test_wrap_links_no_urls PASSED   [ 65%]
+tests/test_crm.py::TestTrackingHelpers::test_inject_pixel_plain_text PASSED [ 68%]
+tests/test_crm.py::TestTrackingHelpers::test_inject_pixel_html PASSED    [ 71%]
+tests/test_crm.py::TestTrackingHelpers::test_inject_pixel_none_base PASSED [ 74%]
+tests/test_crm.py::TestDashboardRoutes::test_crm_stats PASSED            [ 77%]
+tests/test_crm.py::TestDashboardRoutes::test_crm_reminders PASSED        [ 80%]
+tests/test_crm.py::TestDashboardRoutes::test_crm_campaigns PASSED        [ 82%]
+tests/test_crm.py::TestDashboardRoutes::test_crm_leads PASSED            [ 85%]
+tests/test_crm.py::TestDashboardRoutes::test_crm_followup_leads PASSED   [ 88%]
+tests/test_crm.py::TestDashboardRoutes::test_crm_dashboard_page PASSED   [ 91%]
+tests/test_crm.py::TestFeatureFlags::test_stats_returns_disabled_when_off PASSED [ 94%]
+tests/test_crm.py::TestFeatureFlags::test_crm_campaigns_empty_when_off PASSED [ 97%]
+tests/test_crm.py::TestFeatureFlags::test_crm_leads_empty_when_off PASSED [100%]
+
+============================== warnings summary ===============================
+tests/test_crm.py: 45 warnings
+  C:\Users\hassn\AppData\Roaming\Python\Python314\site-packages\sqlalchemy\sql\schema.py:3624: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+
+tests/test_crm.py::TestDeduplication::test_get_or_create_lead_deduplication
+tests/test_crm.py::TestDeduplicationEdgeCases::test_dedup_across_multiple_calls
+tests/test_crm.py::TestDeduplicationEdgeCases::test_dedup_across_multiple_calls
+tests/test_crm.py::TestDeduplicationEdgeCases::test_get_or_create_updates_name
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:25: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    lead.updated_at = datetime.utcnow()
+
+tests/test_crm.py::TestPreventDuplicateSends::test_check_already_sent
+tests/test_crm.py::TestCampaignStatusSync::test_update_sets_status
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:44: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    c = Campaign.query.get(campaign_id)
+
+tests/test_crm.py::TestPreventDuplicateSends::test_check_already_sent
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:70: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    rec = EmailsSent(lead_id=lead_id, campaign_id=campaign_id, sent_at=datetime.utcnow())
+
+tests/test_crm.py::TestCampaignStatusSync::test_update_sets_status
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:107: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    c = Campaign.query.get('sync_1')
+
+tests/test_crm.py::TestCampaignStatusSync::test_update_sets_status
+tests/test_crm.py::TestCampaignStatusSync::test_update_nonexistent_returns_none
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:131: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    c = Campaign.query.get(campaign_id)
+
+tests/test_crm.py::TestCampaignStatusSync::test_update_sets_status
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:134: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    c.updated_at = datetime.utcnow()
+
+tests/test_crm.py::TestCampaignStatusSync::test_update_sets_status
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:110: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    c = Campaign.query.get('sync_1')
+
+tests/test_crm.py::TestFollowUpLogic::test_followup_returns_old_unopened
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:140: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    old = datetime.utcnow() - timedelta(days=5)
+
+tests/test_crm.py::TestFollowUpLogic::test_followup_returns_old_unopened
+tests/test_crm.py::TestFollowUpLogic::test_followup_skips_opened
+tests/test_crm.py::TestFollowUpLogic::test_followup_respects_max_count
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:142: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - __import__('datetime').timedelta(days=days)
+
+tests/test_crm.py::TestFollowUpLogic::test_followup_returns_old_unopened
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:151: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    lead = Lead.query.get(r.lead_id) if r.lead_id else None
+
+tests/test_crm.py::TestFollowUpLogic::test_followup_skips_opened
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:159: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    old = datetime.utcnow() - timedelta(days=5)
+
+tests/test_crm.py::TestFollowUpLogic::test_followup_skips_opened
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:161: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    opened_at=datetime.utcnow(), follow_up_count=0)
+
+tests/test_crm.py::TestFollowUpLogic::test_followup_respects_max_count
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:178: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    old = datetime.utcnow() - timedelta(days=5)
+
+tests/test_crm.py::TestAutomatedReminders::test_reminder_job_populates_alerts
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:200: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    old = datetime.utcnow() - timedelta(days=5)
+
+tests/test_crm.py::TestAutomatedReminders::test_reminder_job_populates_alerts
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\app.py:775: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=app.config.get('REMINDER_DAYS', 3))
+
+tests/test_crm.py::TestAutomatedReminders::test_reminder_job_populates_alerts
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\app.py:784: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    lead = Lead.query.get(r.lead_id) if r.lead_id else None
+
+tests/test_crm.py::TestOpenClickTracking::test_track_open_marks_opened_at
+tests/test_crm.py::TestOpenClickTracking::test_track_open_idempotent
+tests/test_crm.py::TestOpenClickTracking::test_track_open_idempotent
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:78: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    rec = EmailsSent.query.get(emails_sent_id)
+
+tests/test_crm.py::TestOpenClickTracking::test_track_open_marks_opened_at
+tests/test_crm.py::TestOpenClickTracking::test_track_open_idempotent
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:80: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    rec.opened_at = datetime.utcnow()
+
+tests/test_crm.py::TestOpenClickTracking::test_track_open_marks_opened_at
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:227: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    rec = EmailsSent.query.get(eid)
+
+tests/test_crm.py::TestOpenClickTracking::test_track_click_marks_clicked_at_and_redirects
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:87: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    rec = EmailsSent.query.get(emails_sent_id)
+
+tests/test_crm.py::TestOpenClickTracking::test_track_click_marks_clicked_at_and_redirects
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\crm.py:89: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    rec.clicked_at = datetime.utcnow()
+
+tests/test_crm.py::TestOpenClickTracking::test_track_click_marks_clicked_at_and_redirects
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:246: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    rec = EmailsSent.query.get(eid)
+
+tests/test_crm.py::TestOpenClickTracking::test_track_open_idempotent
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:263: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    first_open = EmailsSent.query.get(eid).opened_at
+
+tests/test_crm.py::TestOpenClickTracking::test_track_open_idempotent
+  C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\tests\test_crm.py:267: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    second_open = EmailsSent.query.get(eid).opened_at
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 35 passed, 79 warnings in 3.80s =======================

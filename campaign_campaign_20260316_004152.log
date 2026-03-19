@@ -1,0 +1,98 @@
+[2026-03-16 00:41:52] CAMPAIGN START - 5 senders, 249 leads
+[2026-03-16 00:41:52] VERIFY: Testing sender 1 - hassnainbaloch233@gmail.com
+[2026-03-16 00:41:55] VERIFY: Sender 1 OK - hassnainbaloch233@gmail.com
+[2026-03-16 00:41:55] VERIFY: Testing sender 2 - digivine.hq@gmail.com
+[2026-03-16 00:41:59] VERIFY: Sender 2 OK - digivine.hq@gmail.com
+[2026-03-16 00:41:59] VERIFY: Testing sender 3 - hassnain.rkx.advertising@gmail.com
+[2026-03-16 00:42:01] VERIFY: Sender 3 OK - hassnain.rkx.advertising@gmail.com
+[2026-03-16 00:42:01] VERIFY: Testing sender 4 - hassnainkhan562@gmail.com
+[2026-03-16 00:42:03] VERIFY: Sender 4 OK - hassnainkhan562@gmail.com
+[2026-03-16 00:42:03] VERIFY: Testing sender 5 - hassnainbaloch651@gmail.com
+[2026-03-16 00:42:06] VERIFY: Sender 5 OK - hassnainbaloch651@gmail.com
+[2026-03-16 00:42:06] SENDER 1: Starting - hassnainbaloch233@gmail.com
+[2026-03-16 00:42:06] SENDER 1: Sending to leads 0-248 (249 emails)
+[2026-03-16 00:42:08] SENDER 2: Starting - digivine.hq@gmail.com
+[2026-03-16 00:42:08] SENDER 2: Sending to leads 250-248 (-1 emails)
+[2026-03-16 00:42:08] SENDER 2: DONE - 0/-1
+[2026-03-16 00:42:10] SENDER 3: Starting - hassnain.rkx.advertising@gmail.com
+[2026-03-16 00:42:10] SENDER 3: Sending to leads 500-248 (-251 emails)
+[2026-03-16 00:42:10] SENDER 3: DONE - 0/-251
+[2026-03-16 00:42:10] SENDER 1: ✓ Email sent to drckulkoff@gmail.com
+[2026-03-16 00:42:10] SENDER 1: Waiting 31.7s
+[2026-03-16 00:42:12] SENDER 4: Starting - hassnainkhan562@gmail.com
+[2026-03-16 00:42:12] SENDER 4: Sending to leads 750-248 (-501 emails)
+[2026-03-16 00:42:12] SENDER 4: DONE - 0/-501
+[2026-03-16 00:42:14] SENDER 5: Starting - hassnainbaloch651@gmail.com
+[2026-03-16 00:42:14] SENDER 5: Sending to leads 1000-248 (-751 emails)
+[2026-03-16 00:42:14] SENDER 5: DONE - 0/-751
+[2026-03-16 00:42:16] CAMPAIGN: 5 threads started
+[2026-03-16 00:42:46] SENDER 1: ✓ Email sent to sofia@conejovalleymedspa.com
+[2026-03-16 00:42:46] SENDER 1: Waiting 44.6s
+[2026-03-16 00:43:35] SENDER 1: ✓ Email sent to info@glowaestheticcenter.com
+[2026-03-16 00:43:35] SENDER 1: Waiting 37.5s
+[2026-03-16 00:44:17] SENDER 1: ✓ Email sent to info@beautyranchspa.com
+[2026-03-16 00:44:17] SENDER 1: Waiting 44.1s
+[2026-03-16 00:45:06] SENDER 1: ✓ Email sent to hello@ivemedicalspa.com
+[2026-03-16 00:45:06] SENDER 1: Waiting 37.6s
+[2026-03-16 00:45:47] SENDER 1: ✓ Email sent to info@spamedicaaesthetic.com
+[2026-03-16 00:45:47] SENDER 1: Waiting 27.8s
+[2026-03-16 00:46:21] SENDER 1: ✓ Email sent to info@beautyboostmedspa.com
+[2026-03-16 00:46:21] SENDER 1: Waiting 35.8s
+[2026-03-16 00:47:01] SENDER 1: ✓ Email sent to info@pchmedspa.com
+[2026-03-16 00:47:01] SENDER 1: Waiting 32.1s
+[2026-03-16 00:47:37] SENDER 1: ✓ Email sent to info@skinversemedspa.com
+[2026-03-16 00:47:37] SENDER 1: Waiting 34.4s
+[2026-03-16 00:48:16] SENDER 1: ✓ Email sent to reception@losfelizmedspa.com
+[2026-03-16 00:48:16] SENDER 1: Waiting 26.6s
+[2026-03-16 00:48:48] SENDER 1: ✓ Email sent to contactus@newimagemedspa.com
+[2026-03-16 00:48:48] SENDER 1: Waiting 39.6s
+[2026-03-16 00:49:34] SENDER 1: ✓ Email sent to sylmarmedspa@gmail.com
+[2026-03-16 00:49:34] SENDER 1: Waiting 34.1s
+[2026-03-16 00:50:12] SENDER 1: ✓ Email sent to info@amoderm.com
+[2026-03-16 00:50:12] SENDER 1: Waiting 42.4s
+[2026-03-16 00:50:59] SENDER 1: ✓ Email sent to rosemila2010@gmail.com
+[2026-03-16 00:50:59] SENDER 1: Waiting 35.5s
+[2026-03-16 00:51:38] SENDER 1: ✓ Email sent to mdsbydoctorfatoff@gmail.com
+[2026-03-16 00:51:38] SENDER 1: Waiting 44.4s
+[2026-03-16 00:52:28] SENDER 1: ✓ Email sent to blisspointmedspa@gmail.com
+[2026-03-16 00:52:28] SENDER 1: Waiting 34.6s
+[2026-03-16 00:53:09] SENDER 1: ✓ Email sent to smakandura@gmail.com
+[2026-03-16 00:53:09] SENDER 1: Waiting 26.9s
+[2026-03-16 00:53:40] SENDER 1: ✓ Email sent to info@memedicalspa.com
+[2026-03-16 00:53:40] SENDER 1: Waiting 41.7s
+[2026-03-16 00:54:28] SENDER 1: ✓ Email sent to info@damedspa.com
+[2026-03-16 00:54:28] SENDER 1: Waiting 33.2s
+[2026-03-16 00:55:05] SENDER 1: ✓ Email sent to memedspamp@gmail.com
+[2026-03-16 00:55:05] SENDER 1: Waiting 25.4s
+[2026-03-16 00:55:35] SENDER 1: ✓ Email sent to info@medskinessentials.com
+[2026-03-16 00:55:35] SENDER 1: Waiting 31.7s
+[2026-03-16 00:56:12] SENDER 1: ✓ Email sent to info@damedspa.com
+[2026-03-16 00:56:12] SENDER 1: Waiting 40.2s
+[2026-03-16 00:56:56] SENDER 1: ✓ Email sent to info@damedspa.com
+[2026-03-16 00:56:56] SENDER 1: Waiting 26.2s
+[2026-03-16 00:57:27] SENDER 1: ✓ Email sent to schedule@angellmedicalspa.com
+[2026-03-16 00:57:27] SENDER 1: Waiting 29.3s
+[2026-03-16 00:58:01] SENDER 1: ✓ Email sent to mdsbydoctorfatoff@gmail.com
+[2026-03-16 00:58:01] SENDER 1: Waiting 34.3s
+[2026-03-16 00:58:39] SENDER 1: ✓ Email sent to info@urbanalluresf.com
+[2026-03-16 00:58:39] SENDER 1: Waiting 29.8s
+[2026-03-16 00:59:16] SENDER 1: ✓ Email sent to info@healthbaymedspa.com
+[2026-03-16 00:59:16] SENDER 1: Waiting 34.6s
+[2026-03-16 01:00:00] SENDER 1: ✓ Email sent to benita@miraclemedlounge.com
+[2026-03-16 01:00:00] SENDER 1: Waiting 38.7s
+[2026-03-16 01:00:43] SENDER 1: ✓ Email sent to info@calabloom.com
+[2026-03-16 01:00:43] SENDER 1: Waiting 34.9s
+[2026-03-16 01:01:22] SENDER 1: ✓ Email sent to jademdaesthetics@gmail.com
+[2026-03-16 01:01:22] SENDER 1: Waiting 27.7s
+[2026-03-16 01:01:57] SENDER 1: ✓ Email sent to info@bluespa.com
+[2026-03-16 01:01:57] SENDER 1: Waiting 44.9s
+[2026-03-16 01:02:46] SENDER 1: ✓ Email sent to rjmedspa07@gmail.com
+[2026-03-16 01:02:46] SENDER 1: Waiting 27.7s
+[2026-03-16 01:03:19] SENDER 1: ✓ Email sent to info@southcoastmedspa.com
+[2026-03-16 01:03:19] SENDER 1: Waiting 29.7s
+[2026-03-16 01:03:54] SENDER 1: ✓ Email sent to frontdesk@skinmedicalspa.com
+[2026-03-16 01:03:54] SENDER 1: Waiting 42.3s
+[2026-03-16 01:04:40] SENDER 1: ✓ Email sent to info@damedspa.com
+[2026-03-16 01:04:40] SENDER 1: Waiting 30.4s
+[2026-03-16 01:05:15] SENDER 1: ✓ Email sent to info@pureluxemedical.com
+[2026-03-16 01:05:15] SENDER 1: Waiting 44.6s

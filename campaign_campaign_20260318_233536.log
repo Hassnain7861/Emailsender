@@ -1,0 +1,43 @@
+[2026-03-18 23:35:36] CAMPAIGN START - 1 workers, 1 leads
+[2026-03-18 23:35:36] Speed mode: fast (8-18s)
+[2026-03-18 23:35:36] Leads per worker: 1
+[2026-03-18 23:35:38] WORKER 1: Starting - hassnainbaloch651@gmail.com (1 leads)
+[2026-03-18 23:35:39] WORKER 1: send error template_type=str subject_type=str body_plain_type=str sender_email_type=str sender_password_type=str err='list' object has no attribute 'encode'
+Traceback (most recent call last):
+  File "C:\Python314\Lib\email\message.py", line 396, in set_charset
+    cte(self)
+    ~~~^^^^^^
+TypeError: 'str' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\app.py", line 337, in send_email_with_retry
+    msg.set_charset('utf-8')
+    ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Python314\Lib\email\message.py", line 404, in set_charset
+    payload = payload.encode('ascii', 'surrogateescape')
+              ^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'encode'
+
+[2026-03-18 23:35:45] WORKER 1: send error template_type=str subject_type=str body_plain_type=str sender_email_type=str sender_password_type=str err='list' object has no attribute 'encode'
+Traceback (most recent call last):
+  File "C:\Python314\Lib\email\message.py", line 396, in set_charset
+    cte(self)
+    ~~~^^^^^^
+TypeError: 'str' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\hassn\.docker\cagent\working_directories\docker-gordon-v5\fc03299d-3491-4df1-92cd-727f7d0d8d5d\default\app.py", line 337, in send_email_with_retry
+    msg.set_charset('utf-8')
+    ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Python314\Lib\email\message.py", line 404, in set_charset
+    payload = payload.encode('ascii', 'surrogateescape')
+              ^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'encode'
+
+[2026-03-18 23:35:54] WORKER 1: ✗ Failed to hassnainbaloch233@gmail.com - 'list' object has no attribute 'encode'
+[2026-03-18 23:35:54] WORKER 1: DONE
+[2026-03-18 23:35:54] CAMPAIGN END - sent=0, failed=1, skipped=0

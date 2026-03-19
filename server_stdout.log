@@ -1,0 +1,8 @@
+[SERVER] Starting Multi-Account Email Campaign Dashboard (FIXED)...
+[MODE] PARALLEL - All 5 accounts send SIMULTANEOUSLY
+[LEADS] Each account gets DIFFERENT set of leads
+[DELAY] Random 25-45 seconds between EACH email
+[FEATURE] Pre-verification of all SMTP credentials
+[INFO] Download: http://localhost:5000/download
+ * Serving Flask app 'app_fixed'
+ * Debug mode: off

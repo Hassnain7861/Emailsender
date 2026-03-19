@@ -1,0 +1,9 @@
+[2026-03-19 06:37:50] CAMPAIGN START - 1 workers, 2 leads
+[2026-03-19 06:37:50] Speed mode: fast (8-18s)
+[2026-03-19 06:37:50] Leads per worker: 2
+[2026-03-19 06:37:50] WORKER 1: Starting - sender1@test.com (2 leads)
+[2026-03-19 06:37:50] WORKER 1: ✓ Sent to alice_1773884270@test.com
+[2026-03-19 06:37:50] WORKER 1: Waiting 10.5s
+[2026-03-19 06:38:01] WORKER 1: ✓ Sent to bob_1773884270@test.com
+[2026-03-19 06:38:01] WORKER 1: DONE
+[2026-03-19 06:38:01] CAMPAIGN END - sent=2, failed=0, skipped=0

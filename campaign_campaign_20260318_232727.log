@@ -1,0 +1,7 @@
+[2026-03-18 23:27:27] CAMPAIGN START - 1 workers, 1 leads
+[2026-03-18 23:27:27] Speed mode: medium (20-35s)
+[2026-03-18 23:27:27] Leads per worker: 1
+[2026-03-18 23:27:28] WORKER 1: Starting - hassnainbaloch651@gmail.com (1 leads)
+[2026-03-18 23:27:45] WORKER 1: ✗ Failed to hassnainbaloch233@gmail.com - 'list' object has no attribute 'encode'
+[2026-03-18 23:27:45] WORKER 1: DONE
+[2026-03-18 23:27:45] CAMPAIGN END - sent=0, failed=1, skipped=0

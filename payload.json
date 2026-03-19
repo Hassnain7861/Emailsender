@@ -1,0 +1,26 @@
+{
+  "name": "Test Campaign",
+  "senders": [
+    {
+      "email": "HASSNAINBALOCH233@GMAIL.COM",
+      "password": "lwyejastattqxezm",
+      "provider": "gmail"
+    }
+  ],
+  "leads": [
+    {
+      "Business Name": "DIGIVINE",
+      "Email": "DIGIVINE.HQ@GMAIL.COM",
+      "Location": "DGKHAN"
+    }
+  ],
+  "templates": [
+    {
+      "name": "Template 1",
+      "content": "Hey [Business Name],\n\nI noticed your business in [City].\n\nYou're missing out on [Location] Google rankings.\n\nReply \"interested\" and I'll show you what I found.\n\n— Hassnain K"
+    }
+  ],
+  "subject_lines": ["You're losing ~$7K/mo on Google (not an exaggeration)*"],
+  "follow_ups": [],
+  "emails_per_account": 1
+}
