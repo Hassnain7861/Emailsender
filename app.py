@@ -32,9 +32,26 @@ import traceback
 import queue
 import html
 from contextlib import nullcontext
+import fnmatch
 
 _here = os.path.dirname(os.path.abspath(__file__))
-app = Flask(__name__, template_folder=os.path.join(_here, 'templates'))
+
+# DYNAMIC TEMPLATE LOCATOR (Anti-GitHub-Upload-Mistake Fix)
+# Scans the entire /app container to find exactly where index.html ended up.
+found_template_dir = os.path.join(_here, 'templates')
+for root, dirs, files in os.walk(_here):
+    if 'index.html' in files:
+        found_template_dir = root
+        break
+
+app = Flask(__name__, template_folder=found_template_dir)
+
+print(f"=== FLASK BOOTING ===")
+print(f"Resolved template_folder to: {found_template_dir}")
+import sys
+sys.stdout.flush()
+print(f"=====================")
+
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = 'uploads'
 # CRM: feature flag and config (does not change existing email_logs/sent_leads)
